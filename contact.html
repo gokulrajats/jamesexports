@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.ico" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -33,20 +33,36 @@
 <body>
   <script type="text/javascript">
     function sendEmail() {
-      Email.send({
+
+      var email = document.getElementById('email').value
+      var mobile = document.getElementById('mobile').value
+      var details = document.getElementById('details').value
+      var location = document.getElementById('location').value
+      var name = document.getElementById('name').value
+
+      if(email == "" || name ==  "" || location == "" || details == "" || mobile == "") {
+        alert("Fill the details please")
+      } else {
+        Email.send({
         Host: "smtp.elasticemail.com",
         Port: 2525,
         Username: "tsgr1999@gmail.com",
         Password: "B7E58A86DC03492FBE563DAE8D10C6A793A5",
-        To: 'tsgr1999@gmail.com',
-        From: "tsgr1999@gmail.com",
-        Subject: "Sending Email",
-        Body: "Well that was easy!!",
+        To: 'sales@jamesexports.com',
+        From: "tsgr1999@gmail.com ",
+        Subject: "Mail from JamesExports Website",
+        Body: "NAME : " + name +  "  " + "EMAIL : " +  email + "   " + "MOBILE" +  mobile + "  " + "LOCATION:" + location + "  " + "REQUIREMENTS:" +  details
       })
         .then(function (message) {
           console.log(message)
-          alert("mail sent successfully")
+          document.getElementById('email').value = ""
+      document.getElementById('mobile').value= ""
+    document.getElementById('details').value= ""
+      document.getElementById('location').value= ""
+      document.getElementById('name').value= ""
         });
+      }
+      
     }
   </script>
   <!-- ======= Header ======= -->
@@ -149,7 +165,7 @@
             </div>
   
             <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <form action="" method="post" role="form" class="php-email-form">
                 <div class="form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                 </div>
@@ -160,10 +176,10 @@
                   <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" name="location" id="subject" placeholder="Location" required>
+                  <input type="text" class="form-control" name="location" id="location" placeholder="Location" required>
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Details about your requirements" required></textarea>
+                  <textarea class="form-control" id="details" name="message" rows="5" placeholder="Details about your requirements" required></textarea>
                 </div>
                 <div class="my-3">
                   <div class="loading">Loading</div>
